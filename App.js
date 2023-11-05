@@ -6,8 +6,10 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import BottomTabNavigation from "./navigation/BottomTabNavigation";
-import EditProfile from "./screens/EditProfile";
-// Modal
+import EditProfile from "./screens/edit-profile/EditProfile";
+import Login from "./screens/login/Login";
+import Register from "./screens/register/Register";
+import ModalScreen from "./components/home/ModalScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +46,34 @@ export default function App() {
           options={{
             headerBackTitle: "back",
             headerTitle: "Change Profil",
+          }}
+        />
+
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerBackVisible: false,
+            headerShown: false
+          }}
+        />
+
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            headerBackVisible: false,
+            headerShown: false
+          }}
+        />
+
+        <Stack.Screen
+          name="Modal"
+          component={ModalScreen}
+          options={{
+            headerBackVisible: false,
+            headerTitle: 'Comments',
+            presentation: 'modal',
           }}
         />
       </Stack.Navigator>

@@ -1,18 +1,24 @@
-import { Text, View, Image, FlatList, Dimensions, Button } from "react-native";
-import React, { useRef } from "react";
+import { Text, View, Image, FlatList, Dimensions, TouchableWithoutFeedback } from "react-native";
+import React, { useRef, useState } from "react";
 import styles from "./card.style";
 import { Ionicons } from "@expo/vector-icons";
+import { Link } from '@react-navigation/native';
 
-const Card = ({ username, profilPicture, captions, image, category }) => {
+const Card = ({ username, profilPicture, captions, image, category, createdAt }) => {
+  const[isLike, setIsLike] = useState(false)
+
+  const handleLike = () => {
+    setIsLike(!isLike)
+  }
+  
   const screenwidth = Dimensions.get("window").width;
 
-  const renderItems = ({ item, index }) => {
+  const renderItems = ({ item, index}) => {
     return (
       <View>
         <Image
-          source={item.image}
+          source={{ uri: image}}
           style={[styles.imageContent, { width: screenwidth }]}
-          onError={console.log("eror load image")}
         />
       </View>
     );
@@ -31,7 +37,7 @@ const Card = ({ username, profilPicture, captions, image, category }) => {
           />
           <View>
             <Text style={{ fontFamily: "bold", fontSize: 16 }}>{username}</Text>
-            <Text style={{ fontSize: 12 }}>10 minutes ago</Text>
+            <Text style={{ fontSize: 12 }}>{createdAt}</Text>
           </View>
         </View>
 
@@ -66,7 +72,7 @@ const Card = ({ username, profilPicture, captions, image, category }) => {
         {/* image post */}
         <View>
           <FlatList
-            data={image.slice(0, 2)}
+            data={image.slice(0, 4)}
             renderItem={renderItems}
             horizontal={true}
             pagingEnabled={true}
@@ -75,8 +81,13 @@ const Card = ({ username, profilPicture, captions, image, category }) => {
 
         {/* actions */}
         <View style={styles.actions}>
-          <Ionicons name="heart-outline" size={28} />
-          <Ionicons name="chatbubble-outline" size={26} />
+          <TouchableWithoutFeedback onPress={handleLike}>
+            {isLike ? (<Ionicons name="heart" size={28} color={'red'} />) : (<Ionicons name="heart-outline" size={28} />)}
+          
+          </TouchableWithoutFeedback>
+          <Link to={{screen: 'Modal'}}>
+            <Ionicons name="chatbubble-outline" size={26} />
+          </Link>
           <Ionicons name="share-outline" size={26} />
         </View>
       </View>

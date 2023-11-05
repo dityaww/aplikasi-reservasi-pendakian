@@ -1,6 +1,6 @@
-import Home from "./Home";
-import Products from "./Products";
-import Profile from "./Profile";
-import UploadContent from "./UploadContent";
+import Home from "./home/Home";
+import Menu from "./menu/Menu";
+import Profile from "./profile/Profile";
+import UploadContent from "./uploads/UploadContent";
 
-export { Home, Products, Profile, UploadContent };
+export { Home, Menu, Profile, UploadContent };

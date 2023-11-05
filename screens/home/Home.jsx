@@ -1,14 +1,19 @@
-import { Text, View, Image, ScrollView, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
-import Header from "../components/home/Header";
+import { Text, View, Image, ScrollView, Pressable, Dimensions } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import Header from "../../components/home/Header";
 import { StatusBar } from "expo-status-bar";
 import styles from "./home.style";
-import Card from "../components/home/Card";
-import { getData } from "../hook/api";
+import Card from "../../components/home/Card";
+import { getData } from "../../hook/api";
+import LottieView from "lottie-react-native";
 
 const Home = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [dataContent, setDataContent] = useState([]);
+  const [isloading, setIsLoading] = useState(true)
+
+  const animation = useRef(null);
+  const screenheight = Dimensions.get("window").height;
 
   const category = [
     {
@@ -30,14 +35,18 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    getData()
-      .then((res) => {
-        console.log("respon", res);
-        setDataContent(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setTimeout(() => {
+      getData()
+        .then((res) => {
+          // console.log("respon", res);
+          setDataContent(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        }).finally(() => {
+          setIsLoading(false)
+        });
+    }, 5000);
   }, [dataContent]);
 
   return (
@@ -78,9 +87,32 @@ const Home = () => {
             );
           })}
         </View>
+        
         <View style={styles.postWrapper}>
           {/* <Text style={styles.title}>Share your Experience</Text> */}
-          {dataContent.map((items, index) => {
+          {/* {console.log(dataContent.length)} */}
+          {isloading ? (
+            <View style={{ 
+              height: 600,  
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center'
+              }}>
+              
+              <View style={{width: 300, height: 300,}}>
+                <LottieView
+                  autoPlay
+                  ref={animation}
+                  style={{
+                    width: 300,
+                    height: 300,
+                  }}
+                  // Find more Lottie files at https://lottiefiles.com/featured
+                  source={require('../../assets/loading.json')}
+                  />
+              </View>
+            </View>
+      ) : dataContent.map((items, index) => {
             return (
               <View key={items.id}>
                 <Card
@@ -89,6 +121,7 @@ const Home = () => {
                   captions={items.captions}
                   category={items.category}
                   image={items.image}
+                  createdAt={items.createdAt}
                 />
               </View>
             );

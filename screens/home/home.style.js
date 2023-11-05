@@ -1,4 +1,4 @@
-import { COLORS, SIZES } from "../constants/theme";
+import { COLORS, SIZES } from "../../constants/theme";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   postWrapper: {
     // borderWidth: 2,
     marginVertical: 20,
+    
   },
   category: {
     display: "flex",

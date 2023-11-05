@@ -70,6 +70,13 @@ const Profile = ({ navigation }) => {
             })}
           </View>
         </View>
+
+        <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text style={{ borderWidth: 1, paddingHorizontal: 20}}>Login</Text>
+          </TouchableOpacity>
+          <Text style={{ borderWidth: 1, paddingHorizontal: 20}}>Register</Text>
+        </View>
       </View>
       {/* </SafeAreaView> */}
     </ScrollView>

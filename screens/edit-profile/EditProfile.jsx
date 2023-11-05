@@ -10,7 +10,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./edit.style";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { COLORS, SIZES } from "../constants/theme";
+import { COLORS, SIZES } from "../../constants/theme";
 import * as ImagePicker from "expo-image-picker";
 
 const EditProfile = ({ navigation }) => {

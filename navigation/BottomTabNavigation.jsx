@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Products, Profile, UploadContent } from "../screens";
+import { Home, Menu, Profile, UploadContent } from "../screens";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants/theme";
 
@@ -45,14 +45,15 @@ const BottomTabNavigation = () => {
               />
             );
           },
+          
           headerShown: true,
           headerTitle: "Feeds",
         }}
       />
 
       <Tab.Screen
-        name="Products"
-        component={Products}
+        name="Menu"
+        component={Menu}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -91,19 +92,6 @@ const BottomTabNavigation = () => {
       <Tab.Screen
         name="Profile"
         component={Profile}
-        // listeners={({ navigation, route }) => ({
-        //   tabPress: (e) => {
-        //     e.preventDefault();
-
-        //     if (isLogin === false) {
-        //       alert("tidak bisa akses");
-        //       // navigation.navigate("Home");
-        //     } else {
-        //       alert("masuk");
-        //       navigation.navigate("Profile");
-        //     }
-        //   },
-        // })}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
