@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: "#d4d4d4",
+    marginVertical: 10,
   },
   wrapper: {
     // borderWidth: 1,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 14,
     paddingStart: 12,
-    paddingVertical: 8,
+    paddingTop: 8,
   },
   modalContainer: {
     flex: 1,
