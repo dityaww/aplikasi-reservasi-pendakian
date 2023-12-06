@@ -5,11 +5,17 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
+
 import BottomTabNavigation from "./navigation/BottomTabNavigation";
+import MenuNavigation from "./navigation/MenuNavigation";
+
+
 import EditProfile from "./screens/edit-profile/EditProfile";
 import Login from "./screens/login/Login";
 import Register from "./screens/register/Register";
 import ModalScreen from "./components/home/ModalScreen";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,52 +38,54 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Bottom Navigation"
-          component={BottomTabNavigation}
-          options={{ headerShown: false }}
-        />
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Bottom Navigation"
+            component={BottomTabNavigation}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="Edit"
-          component={EditProfile}
-          options={{
-            headerBackTitle: "back",
-            headerTitle: "Change Profil",
-          }}
-        />
+          <Stack.Screen
+            name="Edit"
+            component={EditProfile}
+            options={{
+              headerBackTitle: "back",
+              headerTitle: "Change Profil",
+            }}
+          />
 
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            headerBackVisible: false,
-            headerShown: false
-          }}
-        />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerBackVisible: false,
+              headerShown: false,
+            }}
+          />
 
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{
-            headerBackVisible: false,
-            headerShown: false
-          }}
-        />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              headerBackVisible: false,
+              headerShown: false,
+            }}
+          />
 
-        <Stack.Screen
-          name="Modal"
-          component={ModalScreen}
-          options={{
-            headerBackVisible: false,
-            headerTitle: 'Comments',
-            presentation: 'modal',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="Modal"
+            component={ModalScreen}
+            options={{
+              headerBackVisible: false,
+              headerTitle: "Comments",
+              presentation: "modal",
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
