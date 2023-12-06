@@ -7,10 +7,6 @@ const styles = StyleSheet.create({
     borderRadius: 120 / 2,
     marginVertical: 10,
   },
-  imgContent: {
-    width: 141.3,
-    height: 141.3,
-  },
   container: {
     // borderWidth: 1,
   },
@@ -65,6 +61,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 2,
+  },
+  noAccount: {
+    height: 600,
+    // backgroundColor: "blue",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imgNoAccount: {
+    width: 300,
+    height: 300,
+  },
+  btnLogin: {
+    backgroundColor: "#6366f1",
+    paddingVertical: 10,
+    width: 120,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100 / 2,
+    marginTop: 20,
   },
 });
 
