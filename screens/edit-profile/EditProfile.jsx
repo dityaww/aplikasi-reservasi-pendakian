@@ -12,11 +12,42 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, SIZES } from "../../constants/theme";
 import * as ImagePicker from "expo-image-picker";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { usersFetched } from "../../redux/Auth/usersSlice";
 
 const EditProfile = ({ navigation }) => {
   const [image, setImage] = useState(
     "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="
   );
+  const [dataUsers, setDataUsers] = useState([])
+
+  // const dispatch = useDispatch()
+  const selector = useSelector((state) => state.users);
+
+  // console.log(selector);
+
+  useEffect(() => {
+    // axios
+    //   .get("http://192.168.1.6:5000/auth/whoami", {
+    //     headers: { "authorization": `${selector.token}` },
+    //   })
+    //   .then((response) => {
+    //     setDataUsers(response.data.data)
+    //     // console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    
+    // console.log("Users:", selector);
+
+    setDataUsers(selector.data)  
+  }, []);
+
+  // console.log(dataUsers);
+
+  // console.log(dataUsers)
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -57,6 +88,7 @@ const EditProfile = ({ navigation }) => {
             <TextInput
               style={styles.textInput}
               placeholder="Fields nama lengkap"
+              value={dataUsers.name}
             />
           </View>
 
@@ -66,6 +98,7 @@ const EditProfile = ({ navigation }) => {
             <TextInput
               style={styles.textInput}
               placeholder="Fields alamat email"
+              value={dataUsers.email}
             />
           </View>
 
