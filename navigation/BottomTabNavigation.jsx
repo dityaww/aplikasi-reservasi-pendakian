@@ -5,6 +5,9 @@ import { Home, Menu, Profile, UploadContent } from "../screens";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants/theme";
 
+import MenuNavigation from "./MenuNavigation";
+import SearchNavigation from "./SearchNavigation";
+
 const Tab = createBottomTabNavigator();
 
 const screenOptions = {
@@ -53,7 +56,7 @@ const BottomTabNavigation = () => {
 
       <Tab.Screen
         name="Menu"
-        component={Menu}
+        component={MenuNavigation}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -66,7 +69,7 @@ const BottomTabNavigation = () => {
               />
             );
           },
-          headerShown: true,
+          // headerShown: true,
         }}
       />
 
@@ -86,6 +89,24 @@ const BottomTabNavigation = () => {
             );
           },
           headerShown: true,
+        }}
+      />
+
+      <Tab.Screen
+        name="Search"
+        component={SearchNavigation}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <Ionicons
+                name={focused ? "search" : "search-outline"}
+                size={30}
+                color={
+                  focused ? COLORS.bottomTabActive : COLORS.bottomTabPasive
+                }
+              />
+            );
+          },
         }}
       />
 
